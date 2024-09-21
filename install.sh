@@ -18,6 +18,8 @@ apt install -y nodejs
 
 apt install python3 python3-pip -y
 
+apt install git -y
+
 echo "nginx version:"
 nginx -v
 
@@ -35,3 +37,8 @@ python3 --version
 
 echo "pip version:"
 pip3 --version
+
+echo "git version:"
+git --version
+
+echo "Installation terminée !"
