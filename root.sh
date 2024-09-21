@@ -16,6 +16,8 @@ apt install curl -y
 curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
 apt install -y nodejs
 
+npm install --global yarn
+
 apt install python3 python3-pip -y
 
 apt install git -y
@@ -42,6 +44,9 @@ node -v
 
 echo "npm version:"
 npm -v
+
+echo "Yarn version:"
+yarn --version
 
 echo "Python version:"
 python3 --version
@@ -70,4 +75,4 @@ npm install --save-dev gh-pages
 
 python3 "$PY_FILE"
 
-echo "All packages have been installed to run your server !"
+echo "All packages have been installed to run your server!"
