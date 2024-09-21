@@ -1,5 +1,7 @@
 #!/bin/bash
 
+PY_FILE="deployer.py"
+
 apt update && sudo apt upgrade -y
 
 apt install nginx -y
@@ -41,4 +43,4 @@ pip3 --version
 echo "git version:"
 git --version
 
-echo "Installation terminée !"
+python3 "$PY_FILE"
