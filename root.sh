@@ -69,3 +69,5 @@ npm install
 npm install --save-dev gh-pages
 
 python3 "$PY_FILE"
+
+echo "All packages have been installed to run your server !"
