@@ -2,7 +2,7 @@ module.exports = {
   apps: [
     {
       name: 'innoverse',
-      script: './index.js',
+      script: './repos/index.js',
       watch: true,
       env: {
         NODE_ENV: 'development'
@@ -13,7 +13,29 @@ module.exports = {
     },
     {
       name: 'account',
-      script: './index.js',
+      script: './repos/index.js',
+      watch: true,
+      env: {
+        NODE_ENV: 'development'
+      },
+      env_production: {
+        NODE_ENV: 'production'
+      }
+    },
+    {
+      name: 'innoverse-ui',
+      script: './repos/index.js',
+      watch: true,
+      env: {
+        NODE_ENV: 'development'
+      },
+      env_production: {
+        NODE_ENV: 'production'
+      }
+    },
+    {
+      name: 'proxy',
+      script: './repos/index.js',
       watch: true,
       env: {
         NODE_ENV: 'development'
