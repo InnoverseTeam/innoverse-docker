@@ -21,14 +21,18 @@ def stop_pm2_web():
 if __name__ == "__main__":
     import sys
     if len(sys.argv) != 2:
-        print("Usage: python launch_servers.py [start|stop]")
+        print("Usage: python deployer.py [start|stop]")
         sys.exit(1)
 
     command = sys.argv[1].lower()
     if command == 'start':
+        echo "Launching all servers.."
         start_pm2_web()
+        echo "All servers have been launched successfully !"
     elif command == 'stop':
+        echo "Stopping all servers.."
         stop_pm2_web()
+        echo "All servers have been stopped successfully !"
     else:
         print("Unknown command. Use 'start' or 'stop'.")
         sys.exit(1)
