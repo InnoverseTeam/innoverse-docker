@@ -75,4 +75,10 @@ npm install --save-dev gh-pages
 
 python3 "$PY_FILE"
 
+if [ -f "./ssl_certs.sh" ]; then
+    bash ./ssl_certs.sh
+else
+    echo "ssl_certs.sh not found."
+fi
+
 echo "All packages have been installed to run your server!"
