@@ -49,5 +49,6 @@ docusaurus-init
 cd innoverse-docker || exit
 
 npm install
+npm install --save-dev gh-pages
 
 python3 "$PY_FILE"
