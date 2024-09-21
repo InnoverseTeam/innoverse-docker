@@ -43,4 +43,11 @@ pip3 --version
 echo "git version:"
 git --version
 
+npm install -g docusaurus-init
+docusaurus-init
+
+cd innoverse-docker || exit
+
+npm install
+
 python3 "$PY_FILE"
