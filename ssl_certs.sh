@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ "$#" -ne 1 ]; then
-    echo "Usage: $0 <votre_domaine>"
+    echo "Usage: $0 <my_domain>"
     exit 1
 fi
 
@@ -11,7 +11,7 @@ apt update
 
 apt install -y certbot python3-certbot-nginx
 
-certbot --nginx -d $DOMAIN --non-interactive --agree-tos --email votre_email@example.com
+certbot --nginx -d $DOMAIN --non-interactive --agree-tos --email test@gmail.com
 
 systemctl enable certbot.timer
 systemctl start certbot.timer
