@@ -3,21 +3,23 @@
 
 # How to use ?
 ### Setup
-- Install git
+- First, Install git.
 ```bash
-apt install git
+$ apt install git -y
 ```
-, then clone this project.
+- And clone this project.
 ```bash
-$ git clone https://github.com/InnoverseTeam/Innoverse-Patcher
-$ cd Innoverse-Patcher
-```
-
-### Compiling using Docker
-- Download docker and devkitpro.
-```bash
-$ docker build . -t innoverse-builder
-$ docker run -it --rm -v .:/app innoverse-builder
+$ git clone https://github.com/InnoverseTeam/innoverse-docker
+$ cd innoverse-docker
 ```
 
-- First step, install docker `$ apt install docker-ce -y`.
+### Start server with Docker
+- Download docker
+```bash
+$ apt install docker-ce -y
+```
+- And now, start the server.
+```bash
+$ docker build . -t innoverse-docker
+$ docker run innoverse-docker
+```
