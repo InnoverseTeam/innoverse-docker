@@ -6,7 +6,8 @@
 - Install git
 ```bash
 apt install git
-```, then clone this project.
+```
+, then clone this project.
 ```bash
 $ git clone https://github.com/InnoverseTeam/Innoverse-Patcher
 $ cd Innoverse-Patcher
