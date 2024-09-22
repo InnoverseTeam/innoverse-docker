@@ -1,0 +1,26 @@
+server {
+    listen 80;
+    server_name innoverse.club;
+
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    server_name innoverse.club;
+
+    ssl_certificate /etc/letsencrypt/live/innoverse.club/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/innoverse.club/privkey.pem;
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_ciphers HIGH:!aNULL:!MD5;
+    ssl_prefer_server_ciphers on;
+
+    location / {
+        proxy_pass http://127.0.0.1:81;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
