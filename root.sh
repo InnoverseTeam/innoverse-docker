@@ -20,6 +20,8 @@ npm install --global yarn
 
 apt install python3 python3-pip -y
 
+npm install -g pm2
+
 echo "nginx version:"
 nginx -v
 
@@ -40,6 +42,9 @@ python3 --version
 
 echo "pip version:"
 pip3 --version
+
+echo "pm2 version:"
+pm2 --version
 
 npm install -g docusaurus-init
 docusaurus-init
