@@ -1,34 +1,57 @@
+import json
+import os
 import subprocess
+import sys
 
-config_file = 'ecosystem.config.php'
+def generate_config():
+    result = subprocess.run(['php', 'ecosystem.config.php'], capture_output=True, text=True)
+    if result.returncode != 0:
+        print("Error generating ecosystem.config.json:")
+        print(result.stderr)
+        return False
+    return True
 
-def start_pm2_web():
-    try:
-        subprocess.run(['/usr/local/bin/pm2', 'start', config_file], check=True)
-    except subprocess.CalledProcessError as e:
-        print(f"Error while starting applications: {e}")
+def load_config():
+    with open('ecosystem.config.json') as f:
+        return json.load(f)
 
-def stop_pm2_web():
-    try:
-        subprocess.run(['/usr/local/bin/pm2', 'stop', config_file], check=True)
-    except subprocess.CalledProcessError as e:
-        print(f"Error while stopping applications: {e}")
+def start_servers(apps):
+    for app in apps:
+        name = app['name']
+        script = app['script']
+        path = app['path']
+        print(f"Starting {name}...")
+        subprocess.run(['pm2', 'start', script, '--name', name], cwd=path)
 
-if __name__ == "__main__":
-    import sys
+def stop_servers(apps):
+    for app in apps:
+        name = app['name']
+        print(f"Stopping {name}...")
+        subprocess.run(['pm2', 'stop', name])
+
+def main():
     if len(sys.argv) != 2:
-        print("Usage: python deployer.py [start|stop]")
-        sys.exit(1)
+        print("Usage: python3 deployer.py [start|stop]")
+        return
 
-    command = sys.argv[1].lower()
+    command = sys.argv[1]
     if command == 'start':
-        print("Launching all servers..")
-        start_pm2_web()
-        print("All servers have been launched successfully!")
+        if not generate_config():
+            return
+
+        config = load_config()
+        apps = config.get('apps', [])
+        start_servers(apps)
     elif command == 'stop':
-        print("Stopping all servers..")
-        stop_pm2_web()
-        print("All servers have been stopped successfully!")
+        if not os.path.exists('ecosystem.config.json'):
+            print("The ecosystem.config.json file does not exist. Please run the PHP script first.")
+            return
+
+        config = load_config()
+        apps = config.get('apps', [])
+        stop_servers(apps)
     else:
-        print("Unknown command. Use 'start' or 'stop'.")
-        sys.exit(1)
+        print("Unrecognized command.")
+
+if __name__ == '__main__':
+    main()
