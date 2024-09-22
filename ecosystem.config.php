@@ -3,26 +3,11 @@
 $config = [
     'apps' => [
         [
-            'name' => 'innoverse',
-            'script' => './repos/index.php',
-            'watch' => true,
-            'env' => [
-                'NODE_ENV' => 'development'
-            ],
-            'env_production' => [
-                'NODE_ENV' => 'production'
-            ]
-        ],
-        [
             'name' => 'account',
-            'script' => './repos/index.php',
-            'watch' => true,
-            'env' => [
-                'NODE_ENV' => 'development'
-            ],
-            'env_production' => [
-                'NODE_ENV' => 'production'
-            ]
+            'script' => 'index.js',
+            'path' => './repos/account/'
         ]
     ]
 ];
+
+file_put_contents('ecosystem.config.json', json_encode($config));
