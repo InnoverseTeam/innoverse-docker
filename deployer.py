@@ -22,13 +22,13 @@ if __name__ == "__main__":
 
     command = sys.argv[1].lower()
     if command == 'start':
-        echo "Launching all servers.."
+        print("Launching all servers..")
         start_pm2_web()
-        echo "All servers have been launched successfully !"
+        print("All servers have been launched successfully!")
     elif command == 'stop':
-        echo "Stopping all servers.."
+        print("Stopping all servers..")
         stop_pm2_web()
-        echo "All servers have been stopped successfully !"
+        print("All servers have been stopped successfully!")
     else:
         print("Unknown command. Use 'start' or 'stop'.")
         sys.exit(1)
