@@ -4,17 +4,13 @@ config_file = 'ecosystem.config.php'
 
 def start_pm2_web():
     try:
-        print("Starting PM2 applications...")
         subprocess.run(['pm2', 'start', config_file], check=True)
-        print("Applications started successfully!")
     except subprocess.CalledProcessError as e:
         print(f"Error while starting applications: {e}")
 
 def stop_pm2_web():
     try:
-        print("Stopping PM2 applications...")
         subprocess.run(['pm2', 'stop', config_file], check=True)
-        print("Applications stopped successfully!")
     except subprocess.CalledProcessError as e:
         print(f"Error while stopping applications: {e}")
 
