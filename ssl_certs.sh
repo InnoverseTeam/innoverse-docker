@@ -1,19 +1,20 @@
 #!/bin/bash
 
-if [ "$#" -ne 1 ]; then
-    echo "Usage: $0 <my_domain>"
-    exit 1
+if ! command -v certbot &> /dev/null; then
+    echo "Certbot is not installed. Installing now..."
+    
+    sudo apt update
+    
+    sudo apt install -y certbot python3-certbot-nginx
 fi
 
-DOMAIN=$1
+read -p "Enter your domain name (e.g., example.com): " DOMAIN
 
-apt update
+echo "Obtaining SSL certificate for $DOMAIN..."
+sudo certbot --nginx -d "$DOMAIN"
 
-apt install -y certbot python3-certbot-nginx
-
-certbot --nginx -d $DOMAIN --non-interactive --agree-tos --email test@gmail.com
-
-systemctl enable certbot.timer
-systemctl start certbot.timer
-
-echo "SSL created for $DOMAIN !"
+if [ $? -eq 0 ]; then
+    echo "SSL certificate successfully obtained for $DOMAIN."
+else
+    echo "Error obtaining SSL certificate."
+fi
