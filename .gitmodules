@@ -1,6 +1,6 @@
 [submodule "repos/account"]
 	path = repos/account
-	url = https://github.com/InnoverseTeam/account
+	url = https://github.com/RetendoNetwork/account.git
 [submodule "repos/Innoverse-Patcher"]
 	path = repos/Innoverse-Patcher
 	url = https://github.com/InnoverseTeam/Innoverse-Patcher.git
