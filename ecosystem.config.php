@@ -7,6 +7,12 @@ $config = [
             'script' => 'index.js',
             'path' => './repos/account/'
         ]
+    ],
+    'apps' => [
+        [
+            'name' => 'Innoverse-Patcher',
+            'path' => './repos/Innoverse-Patcher/'
+        ]
     ]
 ];
 
