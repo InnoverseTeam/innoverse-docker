@@ -6,7 +6,7 @@ import sys
 def generate_config():
     result = subprocess.run(['php', 'ecosystem.config.php'], capture_output=True, text=True)
     if result.returncode != 0:
-        print("Error generating ecosystem.config.json:")
+        print("Error for generating ecosystem.config.json:")
         print(result.stderr)
         return False
     return True
