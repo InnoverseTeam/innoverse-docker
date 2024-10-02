@@ -2,31 +2,64 @@
 
 PY_FILE="deployer.py"
 
-apt update && sudo apt upgrade -y
+is_installed() {
+    dpkg -l | grep -qw "$1"
+}
 
-apt install nginx -y
-systemctl start nginx
-systemctl enable nginx
+apt update && apt upgrade -y
 
-apt install certbot python3-certbot-nginx -y
-apt install php-fpm php-mysql -y
+if ! is_installed nginx; then
+    apt install nginx -y
+    systemctl start nginx
+    systemctl enable nginx
+fi
 
-apt install curl -y
+if ! is_installed certbot; then
+    apt install certbot python3-certbot-nginx -y
+fi
 
-curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
-apt install -y nodejs
+if ! is_installed php-fpm; then
+    apt install php-fpm php-mysql -y
+fi
 
-npm install --global yarn
+if ! is_installed curl; then
+    apt install curl -y
+fi
 
-apt install python3 -y
-apt install python3-pip
-apt-get install python3-venv
-python3 -m venv venv
+if ! is_installed nodejs; then
+    curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+    apt install -y nodejs
+fi
+
+if ! npm list -g | grep -q yarn; then
+    npm install --global yarn
+fi
+
+if ! is_installed python3; then
+    apt install python3 -y
+fi
+
+if ! is_installed python3-pip; then
+    apt install python3-pip -y
+fi
+
+if ! is_installed python3-venv; then
+    apt-get install python3-venv -y
+fi
+
+if [ ! -d "venv" ]; then
+    python3 -m venv venv
+fi
+
 source venv/bin/activate
-pip3 install phpserialize
+if ! pip3 show phpserialize &> /dev/null; then
+    pip3 install phpserialize
+fi
 deactivate
 
-npm install -g pm2
+if ! npm list -g | grep -q pm2; then
+    npm install -g pm2
+fi
 
 echo "nginx version:"
 nginx -v
@@ -52,13 +85,23 @@ pip3 --version
 echo "pm2 version:"
 pm2 --version
 
-npm install -g docusaurus-init
-docusaurus-init
+if ! npm list -g | grep -q docusaurus-init; then
+    npm install -g docusaurus-init
+fi
+
+if [ ! -d "innoverse-docker" ]; then
+    docusaurus-init
+fi
 
 cd innoverse-docker || exit
 
-npm install
-npm install --save-dev gh-pages
+if [ ! -d "node_modules" ]; then
+    npm install
+fi
+
+if ! npm list --save-dev | grep -q gh-pages; then
+    npm install --save-dev gh-pages
+fi
 
 python3 "$PY_FILE"
 
